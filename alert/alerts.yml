@@ -1,0 +1,12 @@
+groups:
+- name: node-resource-alerts
+  rules:
+  - alert: HighCpuUsage
+    expr: |
+      avg(rate(node_cpu_seconds_total{mode!="idle"}[15s])) > 0.001
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "High CPU usage"
+      description: "CPU usage exceeded threshold"
